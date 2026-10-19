@@ -18,11 +18,11 @@ const {
   topper = 'What We Do',
   heading = 'Our Services',
   description = 'From routine maintenance to complex projects, we deliver quality workmanship with honest pricing.',
-  services = siteData.services.map((s) => ({ ...s, href: '/services' })),
+  services = siteData.services.map((s) => ({ ...s, href: '/#services' })),
 } = Astro.props;
 ---
 
-<section class="bg-surface py-section">
+<section id="services" class="bg-surface py-section">
   <div class="mx-auto max-w-site px-4 sm:px-6">
     <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
       <span class="text-topper font-bold uppercase tracking-widest text-accent">{topper}</span>
@@ -34,7 +34,7 @@ const {
       {services.map((service) => (
         <li>
           <a
-            href={service.href || '/services'}
+            href={service.href || '/#services'}
             class="group flex h-full cursor-pointer flex-col rounded-lg border border-border bg-background p-6 shadow-sm transition-shadow duration-200 hover:shadow-md"
           >
             <h3 class="font-heading text-h3 font-semibold text-text">{service.title}</h3>

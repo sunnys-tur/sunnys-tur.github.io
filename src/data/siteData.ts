@@ -54,11 +54,10 @@ export const siteData = {
   // ── Navigation (add, remove, or reorder as needed) ───────────────────────
   nav: [
     { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Services', href: '/services' },
-    { label: 'Reviews', href: '/reviews' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'About', href: '/#about' },
+    { label: 'Services', href: '/#services' },
+    { label: 'Reviews', href: '/#reviews' },
+    { label: 'Contact', href: '/#contact' },
   ],
 
   // ── Services ─────────────────────────────────────────────────────────────
@@ -131,18 +130,15 @@ export const siteData = {
     {
       title: 'Company',
       links: [
-        { label: 'About', href: '/about' },
-        { label: 'Services', href: '/services' },
-        { label: 'Reviews', href: '/reviews' },
-        { label: 'Blog', href: '/blog' },
+        { label: 'About', href: '/#about' },
+        { label: 'Services', href: '/#services' },
+        { label: 'Reviews', href: '/#reviews' },
       ],
     },
     {
       title: 'Support',
       links: [
-        { label: 'Contact', href: '/contact' },
-        { label: 'Privacy', href: '/privacy' },
-        { label: 'Terms', href: '/terms' },
+        { label: 'Contact', href: '/#contact' },
       ],
     },
   ],
