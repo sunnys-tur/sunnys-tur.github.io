@@ -13,7 +13,7 @@ export interface Dict {
   trust: { label: string; value?: string }[];
   services: { heading: string; photo: string; description: string };
   about: { heading: string; body: string[]; imageAlt: string };
-  vehicles: { heading: string; description: string; seats: string; items: { name: string; type: string; seats: number }[] };
+  vehicles: { heading: string; description: string; photo: string };
   cta: { title: string; description: string; button: string };
   footer: { phone: string; email: string; driverEmail: string; createdBy: string; location: string; contact: string; rights: string };
 }

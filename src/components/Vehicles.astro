@@ -1,15 +1,21 @@
 ---
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { getDict, defaultLang, type Lang } from '../i18n';
-import car1 from '../assets/images/vehicles/car1.png';
 
 interface Props {
   lang?: Lang;
 }
 
+const SLOTS = 6;
 const t = getDict(Astro.props.lang ?? defaultLang);
-const images = [car1];
-const vehicles = t.vehicles.items.map((item, i) => ({ ...item, image: images[i] }));
+
+// Drop vehicle photos in src/assets/images/vehicles/ (any name, sorted alphabetically). At least 6 slots are always shown.
+const found = import.meta.glob<{ default: ImageMetadata }>('../assets/images/vehicles/*.{jpg,jpeg,png,webp}', { eager: true });
+const photos = Object.entries(found)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, mod]) => mod.default);
+const slots = Array.from({ length: Math.max(SLOTS, photos.length) }, (_, i) => photos[i]);
 ---
 
 <section id="vehicles" class="scroll-mt-28 bg-surface py-section">
@@ -22,13 +28,18 @@ const vehicles = t.vehicles.items.map((item, i) => ({ ...item, image: images[i] 
     </div>
 
     <ul class="flex flex-wrap justify-center gap-6" role="list">
-      {vehicles.map((v) => (
-        <li class="w-full max-w-sm overflow-hidden rounded-lg border border-border bg-background shadow-sm">
-          <Image src={v.image} alt={v.name} width={640} height={480} loading="lazy" class="aspect-4/3 w-full object-cover" />
-          <div class="p-5">
-            <h3 class="font-heading text-h3 font-semibold text-text">{v.name}</h3>
-            <p class="mt-1 text-sm text-text-muted">{v.type} &middot; {v.seats} {t.vehicles.seats}</p>
-          </div>
+      {slots.map((photo, i) => (
+        <li class="w-full overflow-hidden sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] rounded-lg border border-border bg-background shadow-sm">
+          {photo ? (
+            <Image src={photo} alt={`${t.vehicles.heading} ${i + 1}`} width={640} height={480} loading="lazy" class="aspect-4/3 w-full object-cover" />
+          ) : (
+            <div class="flex aspect-4/3 flex-col items-center justify-center gap-2 border-2 border-dashed border-border text-text-muted">
+              <svg class="size-12 opacity-50" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.16-5.16a2.25 2.25 0 013.18 0l5.16 5.16m-1.5-1.5l1.41-1.41a2.25 2.25 0 013.18 0l2.41 2.41M3.75 19.5h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zM13.5 9.75h.008v.008H13.5V9.75z" />
+              </svg>
+              <span class="text-sm font-medium">{t.vehicles.photo} {i + 1}</span>
+            </div>
+          )}
         </li>
       ))}
     </ul>
