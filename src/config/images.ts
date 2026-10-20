@@ -32,7 +32,7 @@ import type { ImageMetadata } from 'astro';
 // ── Hero ──────────────────────────────────────────────────────────────────────
 // Recommended: landscape, at least 1600 × 1200 px
 // To swap: replace the file in src/assets/images/hero/ and update the filename.
-import heroImage from '../assets/images/hero/hero.jpg';
+import heroImage from '../assets/images/hero/presentation.jpg';
 export { heroImage };
 
 // ── About ─────────────────────────────────────────────────────────────────────
@@ -44,46 +44,3 @@ export { heroImage };
 export const aboutImage: ImageMetadata | undefined = undefined;
 //comment out above and uncomment below to use your own image
 // export { aboutImage };
-
-// ── Gallery — auto-discovered ─────────────────────────────────────────────────
-// Drop any number of image files into src/assets/images/gallery/ and they will
-// appear in the gallery automatically — no code changes needed.
-//
-// The file name becomes the alt text:
-//   kitchen-remodel.jpg    → "Kitchen Remodel"
-//   deck-installation.jpg  → "Deck Installation"
-//
-// Recommended: landscape images, at least 800 × 600 px each.
-// Aim for consistent proportions (4:3 works best with the gallery grid).
-
-export interface GalleryImage {
-  src: ImageMetadata | string;
-  alt: string;
-}
-
-const discovered = Object.entries(
-  import.meta.glob<{ default: ImageMetadata }>(
-    '../assets/images/gallery/*.{jpg,jpeg,png,webp,avif}',
-    { eager: true },
-  ),
-).map(([path, mod]): GalleryImage => ({
-  src: mod.default,
-  alt: path
-    .split('/').pop()!
-    .replace(/\.[^.]+$/, '')        // strip extension
-    .replace(/[-_]/g, ' ')          // hyphens/underscores → spaces
-    .replace(/\b\w/g, (c) => c.toUpperCase()), // Title Case
-}));
-
-// Unsplash placeholders used when the gallery folder is empty.
-// Replace by adding your own images — the placeholders are removed automatically.
-const placeholders: GalleryImage[] = [
-  { src: 'https://images.unsplash.com/photo-1772567732969-c1506edf80a0?w=600&q=80', alt: 'Completed kitchen renovation' },
-  { src: 'https://images.unsplash.com/photo-1523413363574-c30aa1c2a516?w=600&q=80', alt: 'Bathroom remodel with modern fixtures' },
-  { src: 'https://images.unsplash.com/photo-1761166518480-49279513d65f?w=600&q=80', alt: 'Fresh landscaping and walkway installation' },
-  { src: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80', alt: 'Interior painting and trim work' },
-  { src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80', alt: 'Electrical panel upgrade' },
-  { src: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80', alt: 'Deck construction and staining' },
-];
-
-export const galleryImages: GalleryImage[] = discovered.length > 0 ? discovered : placeholders;

@@ -11,12 +11,14 @@ import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import { brand } from '../config/brand';
 import { siteData } from '../data/siteData';
+import { getDict, getLang, languages, type Lang } from '../i18n';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   schema?: Record<string, unknown>;
+  lang?: Lang;
 }
 
 const {
@@ -24,19 +26,25 @@ const {
   description = brand.description,
   image = '/og-image.png',
   schema,
+  lang = 'pt',
 } = Astro.props;
+const t = getDict(lang);
 
 const pageTitle = title === brand.name ? title : `${title} — ${brand.name}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? brand.url);
 ---
 
-<html lang={brand.locale.split('_')[0]} class="scroll-smooth">
+<html lang={t.htmlLang} class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
     <link rel="canonical" href={canonicalURL} />
+    {(Object.keys(languages) as Lang[]).map((code) => (
+      <link rel="alternate" hreflang={code} href={new URL(languages[code].path, Astro.site ?? brand.url)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site ?? brand.url)} />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
 
@@ -46,7 +54,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? brand.url);
     <meta property="og:title"       content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image"       content={image} />
-    <meta property="og:locale"      content={brand.locale} />
+    <meta property="og:locale"      content={languages[lang].locale} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card"        content="summary_large_image" />
@@ -56,7 +64,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? brand.url);
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
 
     <!-- Fonts -->
     <Font cssVariable="--font-display" preload />
@@ -86,7 +94,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? brand.url);
       class="sr-only focus:not-sr-only focus:absolute focus:z-[99999] focus:bg-primary focus:text-primary-fg focus:px-4 focus:py-2 focus:rounded-md"
       href="#main"
     >
-      Skip to main content
+      {t.skip}
     </a>
 
     <slot name="header" />

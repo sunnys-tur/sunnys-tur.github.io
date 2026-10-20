@@ -1,42 +1,48 @@
 ---
+import { getDict, defaultLang, type Lang } from '../i18n';
 import { siteData } from '../data/siteData';
 
 interface Props {
+  lang?: Lang;
   title?: string;
   description?: string;
   buttonText?: string;
   buttonHref?: string;
 }
 
+const t = getDict(Astro.props.lang ?? defaultLang);
 const {
-  title = 'Ready to Get Started?',
-  description = 'Contact us today for a free, no-obligation quote. We\'re here to help with any project — big or small.',
-  buttonText = 'Get Your Free Quote',
-  buttonHref = '/#contact',
+  title = t.cta.title,
+  description = t.cta.description,
+  buttonText = t.cta.button,
+  buttonHref = siteData.whatsapp,
 } = Astro.props;
 ---
 
-<section id="contact" class="relative overflow-hidden bg-primary py-16 sm:py-20 lg:py-24">
+<section id="contact" class="relative overflow-hidden bg-[#1f2937] py-16 sm:py-20 lg:py-24">
   <div class="mx-auto max-w-site px-4 text-center sm:px-6">
-    <h2 class="font-heading text-h2 font-bold uppercase text-primary-fg">
+    <h2 class="font-heading text-h2 font-bold uppercase text-white">
       {title}
     </h2>
-    <p class="mx-auto mt-4 max-w-xl text-primary-fg/80 leading-relaxed">
+    <p class="mx-auto mt-4 max-w-xl text-white/80 leading-relaxed">
       {description}
     </p>
 
     <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
       <a
         href={buttonHref}
-        class="inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-8 py-3 text-base font-bold text-accent-fg shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-green-600 px-8 py-3 text-base font-bold text-white shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
       >
+        <svg class="size-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2z"/></svg>
         {buttonText}
       </a>
       <a
         href={`tel:${siteData.phoneForTel}`}
-        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border-2 border-primary-fg/30 px-8 py-3 text-base font-bold text-primary-fg transition-colors hover:border-primary-fg hover:bg-primary-fg/10"
+        class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border-2 border-white/30 px-8 py-3 text-base font-bold text-white transition-colors hover:border-white hover:bg-[#1f2937]-fg/10"
       >
-        Call{" "}{siteData.phoneFormatted}
+        {t.call}{" "}{siteData.phoneFormatted}
       </a>
     </div>
   </div>

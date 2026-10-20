@@ -13,29 +13,33 @@
 
 export const siteData = {
   // ── Business identity ────────────────────────────────────────────────────
-  name: 'Small Business Starter',
+  name: "Sunny's Tur",
   tagline: 'Professional service you can trust.',
   description:
     'A fast, mobile-first small-business website template built with Astro 7 and Tailwind v4. Fully customisable for any trade or service business.',
-  url: 'https://example.com',
+  url: 'https://sunnys-tur.github.io',
   locale: 'en_US',
 
   /** Business / contractor license number. Displayed in the header and footer
    *  as a trust signal. Set to an empty string to hide it. */
-  license: 'Lic# 123456',
+  license: 'CNPJ 103035610001-13',
 
   // ── Contact ──────────────────────────────────────────────────────────────
-  email: 'hello@example.com',
-  phoneForTel: '555-867-5309',
-  phoneFormatted: '(555) 867-5309',
+  email: 'sunnystur01@gmail.com',
+  driverEmail: 'paulocardoso40@yahoo.com',
+  landlineForTel: '+555130931446',
+  landlineFormatted: '(51) 3093-1446',
+  phoneForTel: '+5551996674493',
+  whatsapp: 'https://wa.me/5551996674493',
+  phoneFormatted: '+55 (51) 99667-4493',
   address: {
-    lineOne: '123 Main Street',
+    lineOne: '',
     lineTwo: 'Suite 100',
-    city: 'Denver',
-    state: 'CO',
-    zip: '80206',
-    country: 'US',
-    mapLink: 'https://maps.app.goo.gl/example',
+    city: 'Porto Alegre',
+    state: 'RS',
+    zip: '',
+    country: 'BR',
+    mapLink: 'https://www.google.com/maps/search/?api=1&query=Porto+Alegre+RS+Brasil',
   },
   hours: [
     { days: 'Monday - Friday', time: '7:00 AM - 6:00 PM' },
@@ -46,19 +50,13 @@ export const siteData = {
 
   // ── Social media (set to empty string to hide a link) ────────────────────
   socials: {
-    facebook: 'https://www.facebook.com/',
-    instagram: 'https://www.instagram.com/',
-    google: 'https://www.google.com/maps',
+    facebook: '',
+    instagram: 'https://www.instagram.com/sunnys_tur/',
+    google: '',
   },
 
   // ── Navigation (add, remove, or reorder as needed) ───────────────────────
-  nav: [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/#about' },
-    { label: 'Services', href: '/#services' },
-    { label: 'Reviews', href: '/#reviews' },
-    { label: 'Contact', href: '/#contact' },
-  ],
+  nav: [],
 
   // ── Services ─────────────────────────────────────────────────────────────
   services: [
@@ -126,22 +124,7 @@ export const siteData = {
   ],
 
   // ── Footer nav columns ──────────────────────────────────────────────────
-  footerNav: [
-    {
-      title: 'Company',
-      links: [
-        { label: 'About', href: '/#about' },
-        { label: 'Services', href: '/#services' },
-        { label: 'Reviews', href: '/#reviews' },
-      ],
-    },
-    {
-      title: 'Support',
-      links: [
-        { label: 'Contact', href: '/#contact' },
-      ],
-    },
-  ],
+  footerNav: [],
 } as const;
 
 export type SiteData = typeof siteData;

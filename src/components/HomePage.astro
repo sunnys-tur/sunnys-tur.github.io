@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Hero from './Hero.astro';
+import TrustBar from './TrustBar.astro';
+import Services from './Services.astro';
+import About from './About.astro';
+import Vehicles from './Vehicles.astro';
+import CTA from './CTA.astro';
+import { brand } from '../config/brand';
+import { siteData } from '../data/siteData';
+import { getDict, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getDict(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={brand.name}
+  description={t.description}
+  schema={{
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: siteData.name,
+    description: t.description,
+    inLanguage: t.htmlLang,
+    telephone: siteData.phoneForTel,
+    email: siteData.email,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: siteData.address.city,
+      addressRegion: siteData.address.state,
+      addressCountry: siteData.address.country,
+    },
+    url: siteData.url,
+  }}
+>
+  <Header slot="header" lang={lang} />
+
+  <Hero lang={lang} />
+  <TrustBar lang={lang} />
+  <Services lang={lang} />
+  <About lang={lang} />
+  <Vehicles lang={lang} />
+  <CTA lang={lang} />
+
+  <Footer slot="footer" lang={lang} />
+</BaseLayout>

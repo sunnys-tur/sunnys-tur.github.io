@@ -9,7 +9,7 @@ test.describe('Homepage', () => {
 
   test('has correct page title', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/Small Business Starter/i);
+    await expect(page).toHaveTitle(/Sunny's Tur/i);
   });
 
   test('has meta description', async ({ page }) => {

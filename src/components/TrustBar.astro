@@ -1,11 +1,13 @@
 ---
-import { siteData } from '../data/siteData';
+import { getDict, defaultLang, type Lang } from '../i18n';
 
 interface Props {
+  lang?: Lang;
   items?: { label: string; value?: string }[];
 }
 
-const { items = siteData.trustItems } = Astro.props;
+const t = getDict(Astro.props.lang ?? defaultLang);
+const { items = t.trust } = Astro.props;
 ---
 
 <section class="border-y border-border bg-surface" aria-label="Trust signals">
@@ -14,7 +16,7 @@ const { items = siteData.trustItems } = Astro.props;
       {items.map(({ label, value }: { label: string; value?: string }) => (
         <li class="flex shrink-0 items-center justify-center gap-2.5 text-sm sm:text-base">
           <span class="font-heading font-semibold text-text">
-            {value && <span class="text-primary mr-1">{value}</span>}
+            {value && <span class="mr-1.5 text-xl font-extrabold text-accent sm:text-2xl">{value}</span>}
             {label}
           </span>
         </li>

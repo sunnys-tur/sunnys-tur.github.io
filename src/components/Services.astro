@@ -1,50 +1,57 @@
 ---
-import { siteData } from '../data/siteData';
-
-interface ServiceItem {
-  title: string;
-  description: string;
-  href?: string;
-}
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { getDict, defaultLang, type Lang } from '../i18n';
 
 interface Props {
-  topper?: string;
+  lang?: Lang;
   heading?: string;
   description?: string;
-  services?: ServiceItem[];
+  driverName?: string;
 }
 
+const t = getDict(Astro.props.lang ?? defaultLang);
 const {
-  topper = 'What We Do',
-  heading = 'Our Services',
-  description = 'From routine maintenance to complex projects, we deliver quality workmanship with honest pricing.',
-  services = siteData.services.map((s) => ({ ...s, href: '/#services' })),
+  heading = t.services.heading,
+  description = t.services.description,
+  driverName = 'Paulo Cardoso',
 } = Astro.props;
+
+// Drop the driver photo at src/assets/images/about/driver.(jpg|jpeg|png|webp) and it appears automatically.
+const photos = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/images/about/driver.{jpg,jpeg,png,webp}',
+  { eager: true },
+);
+const photo = Object.values(photos)[0]?.default;
+const parts = description.split(driverName);
 ---
 
 <section id="services" class="bg-surface py-section">
-  <div class="mx-auto max-w-site px-4 sm:px-6">
-    <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-      <span class="text-topper font-bold uppercase tracking-widest text-accent">{topper}</span>
-      <h2 class="mt-2 font-heading text-h2 font-bold uppercase text-text">{heading}</h2>
-      <p class="mt-3 text-text-muted leading-relaxed">{description}</p>
+  <div class="mx-auto grid max-w-site grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14">
+    <div class="text-center lg:text-left">
+      <h2 class="font-heading text-h2 font-bold uppercase text-text">{heading}</h2>
+      <p class="mt-1 font-heading text-display font-extrabold uppercase leading-none text-accent">{driverName}</p>
+      <p class="mt-6 text-lead leading-relaxed text-text-muted">
+        {parts.map((part, i) => (
+          <>
+            {part}
+            {i < parts.length - 1 && <strong class="font-bold text-accent">{driverName}</strong>}
+          </>
+        ))}
+      </p>
     </div>
 
-    <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
-      {services.map((service) => (
-        <li>
-          <a
-            href={service.href || '/#services'}
-            class="group flex h-full cursor-pointer flex-col rounded-lg border border-border bg-background p-6 shadow-sm transition-shadow duration-200 hover:shadow-md"
-          >
-            <h3 class="font-heading text-h3 font-semibold text-text">{service.title}</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-text-muted">{service.description}</p>
-            <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors group-hover:text-accent" aria-hidden="true">
-              Learn more <span class="transition-transform group-hover:translate-x-0.5">&rarr;</span>
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div class="mx-auto w-full max-w-md overflow-hidden rounded-lg shadow-lg">
+      {photo ? (
+        <Image src={photo} alt={driverName} width={600} height={750} loading="lazy" class="aspect-4/5 size-full object-cover" />
+      ) : (
+        <div class="flex aspect-4/5 flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-border bg-background text-text-muted">
+          <svg class="size-16 opacity-50" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a7.5 7.5 0 0 1 15 0" />
+          </svg>
+          <span class="text-sm font-medium">{t.services.photo}</span>
+        </div>
+      )}
+    </div>
   </div>
 </section>

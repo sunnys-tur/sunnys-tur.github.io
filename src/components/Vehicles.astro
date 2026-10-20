@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import { getDict, defaultLang, type Lang } from '../i18n';
+import car1 from '../assets/images/vehicles/car1.png';
+
+interface Props {
+  lang?: Lang;
+}
+
+const t = getDict(Astro.props.lang ?? defaultLang);
+const images = [car1];
+const vehicles = t.vehicles.items.map((item, i) => ({ ...item, image: images[i] }));
+---
+
+<section id="vehicles" class="scroll-mt-28 bg-surface py-section">
+  <div class="mx-auto max-w-site px-4 sm:px-6">
+    <div class="mx-auto mb-12 max-w-2xl text-center lg:mb-16">
+      <h2 class="font-heading text-h2 font-bold uppercase text-text">{t.vehicles.heading}</h2>
+      <div class="mt-6 space-y-5 text-lead leading-8 text-text-muted">
+        {t.vehicles.description.split('\n\n').map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+
+    <ul class="flex flex-wrap justify-center gap-6" role="list">
+      {vehicles.map((v) => (
+        <li class="w-full max-w-sm overflow-hidden rounded-lg border border-border bg-background shadow-sm">
+          <Image src={v.image} alt={v.name} width={640} height={480} loading="lazy" class="aspect-4/3 w-full object-cover" />
+          <div class="p-5">
+            <h3 class="font-heading text-h3 font-semibold text-text">{v.name}</h3>
+            <p class="mt-1 text-sm text-text-muted">{v.type} &middot; {v.seats} {t.vehicles.seats}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
