@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import comet from '../assets/images/about/comet.png';
 import { getDict, defaultLang, type Lang } from '../i18n';
 
 interface Props {
@@ -15,15 +17,7 @@ const { heading = t.about.heading, body = t.about.body, imageAlt = t.about.image
 <section id="about" class="py-section">
   <div class="mx-auto grid max-w-site grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14">
     <div class="flex justify-center">
-      <img
-        src="/images/logo-sun.png"
-        alt={imageAlt}
-        width="400"
-        height="400"
-        loading="lazy"
-        decoding="async"
-        class="size-64 rounded-full bg-[#0a8fd8] object-contain shadow-lg sm:size-80"
-      />
+      <Image src={comet} alt={imageAlt} width={600} loading="lazy" class="h-auto w-full max-w-lg drop-shadow-xl" />
     </div>
 
     <div class="space-y-5">
