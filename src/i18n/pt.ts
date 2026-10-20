@@ -25,7 +25,7 @@ export const pt: Dict = {
   about: {
     heading: "Sobre a empresa",
     body: [
-      "A Sunny's Tur é uma empresa de transfer executivo de Porto Alegre, Rio Grande do Sul, Brasil, dedicada a oferecer deslocamentos seguros, pontuais e confortáveis para executivos, turistas e famílias. Atuamos em traslados de aeroporto, hotéis, eventos e viagens corporativas, com motorista profissional bilíngue e atendimento em inglês, português e espanhol.",
+      "A Sunny's Tur é uma empresa de transfer executivo de Porto Alegre - Rio Grande do Sul/Brasil, dedicada a oferecer deslocamentos seguros, pontuais e confortáveis para executivos, turistas e famílias. Atuamos em traslados de aeroporto, hotéis, eventos e viagens corporativas, com motorista profissional bilíngue e atendimento em inglês, português e espanhol.",
       "Nosso compromisso é transformar cada trajeto em uma experiência tranquila, com veículos de alto padrão, atenção aos detalhes e total respeito ao horário do cliente.",
     ],
     imageAlt: "Logo da Sunny's Tur",
@@ -37,9 +37,9 @@ export const pt: Dict = {
     items: [{ name: 'Chevrolet Spin', type: "Minivan", seats: 7 }],
   },
   cta: {
-    title: 'Pronto para Começar?',
-    description: 'Entre em contato hoje mesmo para um orçamento grátis e sem compromisso. Estamos aqui para ajudar em qualquer projeto — grande ou pequeno.',
+    title: "Reserve o seu transfer executivo",
+    description: "Solicite seu orçamento sem compromisso.",
     button: 'Solicite Seu Orçamento Grátis',
   },
-  footer: { createdBy: 'Site criado por', location: 'Porto Alegre, Rio Grande do Sul, Brasil', contact: 'Contato', rights: 'Todos os direitos reservados.' },
+  footer: { phone: "Telefone", email: "E-mail oficial", driverEmail: "E-mail do motorista", createdBy: 'Site criado por', location: 'Porto Alegre - Rio Grande do Sul/Brasil', contact: 'Contato', rights: 'Todos os direitos reservados.' },
 };

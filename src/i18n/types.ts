@@ -15,5 +15,5 @@ export interface Dict {
   about: { heading: string; body: string[]; imageAlt: string };
   vehicles: { heading: string; description: string; seats: string; items: { name: string; type: string; seats: number }[] };
   cta: { title: string; description: string; button: string };
-  footer: { createdBy: string; location: string; contact: string; rights: string };
+  footer: { phone: string; email: string; driverEmail: string; createdBy: string; location: string; contact: string; rights: string };
 }

@@ -46,14 +46,14 @@ const instagramHandle = siteData.socials.instagram.replace(/\/$/, '').split('/')
           </li>
           <li>
             <a href={`tel:${siteData.landlineForTel}`} class={link}>
-              {siteData.landlineFormatted}
+              {t.footer.phone}: {siteData.landlineFormatted}
             </a>
           </li>
           <li>
-            <a href={`mailto:${siteData.email}`} class={link}>{siteData.email}</a>
+            <a href={`mailto:${siteData.email}`} class={link}>{t.footer.email}: {siteData.email}</a>
           </li>
           <li>
-            <a href={`mailto:${siteData.driverEmail}`} class={link}>{siteData.driverEmail}</a>
+            <a href={`mailto:${siteData.driverEmail}`} class={link}>{t.footer.driverEmail}: {siteData.driverEmail}</a>
           </li>
           <li>
             <a href={siteData.address.mapLink} target="_blank" rel="noopener noreferrer" class={link}>
