@@ -1,5 +1,6 @@
 ---
 import { getDict, defaultLang, type Lang } from '../i18n';
+import CardBrands from './CardBrands.astro';
 import { siteData } from '../data/siteData';
 
 interface Props {
@@ -44,6 +45,11 @@ const {
       >
         {t.call}{" "}{siteData.phoneFormatted}
       </a>
+    </div>
+
+    <div class="mt-10 flex flex-col items-center gap-3">
+      <p class="text-sm font-medium text-white/70">{t.cta.cards}</p>
+      <CardBrands />
     </div>
   </div>
 </section>

@@ -38,6 +38,7 @@ export const en: Dict = {
   cta: {
     title: "Book Your Executive Transfer",
     description: "Request your no-obligation quote.",
+    cards: "Credit cards accepted",
     button: 'Book via WhatsApp',
   },
   footer: { phone: "Phone", email: "Official email", driverEmail: "Driver's email", createdBy: 'Website created by', location: 'Porto Alegre - Rio Grande do Sul/Brasil', contact: 'Contact', rights: 'All rights reserved.' },

@@ -1,0 +1,39 @@
+---
+import type { Lang } from '../i18n';
+
+interface Props {
+  code: Lang;
+}
+
+const { code } = Astro.props;
+const stripes = Array.from({ length: 7 }, (_, i) => i * 2);
+const stars = Array.from({ length: 12 }, (_, i) => ({ x: 1.4 + (i % 4) * 2.4 + (Math.floor(i / 4) % 2) * 0, y: 1.6 + Math.floor(i / 4) * 2.8 }));
+---
+
+<svg class="h-5 w-7 rounded-sm shadow-sm ring-1 ring-black/10" viewBox="0 0 28 20" aria-hidden="true" focusable="false">
+  {code === 'pt' && (
+    <>
+      <rect width="28" height="20" fill="#009b3a" />
+      <path d="M14 2.2 25.4 10 14 17.8 2.6 10Z" fill="#ffdf00" />
+      <circle cx="14" cy="10" r="4.3" fill="#002776" />
+      <path d="M9.9 9.1c2.8-.6 5.7-.1 8.3 1.3" stroke="#fff" stroke-width=".7" fill="none" />
+    </>
+  )}
+  {code === 'en' && (
+    <>
+      <rect width="28" height="20" fill="#fff" />
+      {stripes.map((y) => <rect y={y * 1.538} width="28" height="1.538" fill="#b22234" />)}
+      <rect width="12" height="10.77" fill="#3c3b6e" />
+      {stars.map(({ x, y }) => <circle cx={x + 0.9} cy={y + 0.3} r=".55" fill="#fff" />)}
+    </>
+  )}
+  {code === 'es' && (
+    <>
+      <rect width="9.34" height="20" fill="#006847" />
+      <rect x="9.33" width="9.34" height="20" fill="#fff" />
+      <rect x="18.66" width="9.34" height="20" fill="#ce1126" />
+      <circle cx="14" cy="10" r="2.6" fill="#8c6d3f" />
+      <circle cx="14" cy="10" r="1.5" fill="#4f8a3b" />
+    </>
+  )}
+</svg>

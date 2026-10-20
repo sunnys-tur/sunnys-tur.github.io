@@ -38,6 +38,7 @@ export const pt: Dict = {
   cta: {
     title: "Reserve o seu transfer executivo",
     description: "Solicite seu orçamento sem compromisso.",
+    cards: "Aceita-se cartões de crédito",
     button: 'Reserve pelo WhatsApp',
   },
   footer: { phone: "Telefone", email: "E-mail oficial", driverEmail: "E-mail do motorista", createdBy: 'Site criado por', location: 'Porto Alegre - Rio Grande do Sul/Brasil', contact: 'Contato', rights: 'Todos os direitos reservados.' },

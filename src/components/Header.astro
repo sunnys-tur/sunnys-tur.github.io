@@ -1,5 +1,6 @@
 ---
 import { getDict, defaultLang, languages, type Lang } from '../i18n';
+import Flag from './Flag.astro';
 import { brand } from "../config/brand";
 import { siteData } from "../data/siteData";
 
@@ -94,13 +95,14 @@ const currentPath = strip(Astro.url.pathname);
           data-astro-reload
           lang={code}
           title={l.label}
+          aria-label={l.label}
           aria-current={code === lang ? "true" : undefined}
           class:list={[
-            "rounded-md px-2 py-2 text-xs font-bold transition-colors",
-            code === lang ? "bg-primary/10 text-primary" : "text-text-muted hover:text-text",
+            "inline-flex items-center rounded-md px-1.5 py-2 transition-opacity",
+            code === lang ? "bg-primary/15 ring-2 ring-primary/60" : "opacity-60 hover:opacity-100",
           ]}
         >
-          {l.short}
+          <Flag code={code} />
         </a>
       ))}
     </nav>
